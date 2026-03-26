@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+#PBS -N CISM_AGE_TRACER_ADVIK
+#PBS -A P93300301
+#PBS -l walltime=12:00:00
+#PBS -q main
+#PBS -l job_priority=premium
+#PBS -k eod
+#PBS -j oe
+#PBS -m abe
+#PBS -M advike@ucar.edu
+#PBS -l select=2:ncpus=128:mpiprocs=128
+
+. derecho-intel-modules
+
+mpiexec -n 256 -ppn 128 ./cism_driver cism_tracer_test.config.restart > cism.out.$PBS_JOBID 2>&1
